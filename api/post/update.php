@@ -1,5 +1,6 @@
 <?php
-
+header('Access-Control-Allow-Methods: PUT');
+header('Access-Control-Allow-Headers: Access-Control-Allow-Headers:, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 include_once '../../header.php';
 
 $post = new Post($database->db_connect());

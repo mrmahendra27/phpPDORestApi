@@ -125,11 +125,11 @@ class Post {
         $this->body = htmlspecialchars(strip_tags($this->body));
         $this->category_id = htmlspecialchars(strip_tags($this->category_id));
 
-        $statement->bindParam('title', $this->title);
-        $statement->bindParam('author', $this->author);
-        $statement->bindParam('body', $this->body);
-        $statement->bindParam('category_id', $this->category_id);
-        $statement->bindParam('id', $this->id);
+        $statement->bindParam(':title', $this->title);
+        $statement->bindParam(':author', $this->author);
+        $statement->bindParam(':body', $this->body);
+        $statement->bindParam(':category_id', $this->category_id);
+        $statement->bindParam(':id', $this->id);
 
         if($statement->execute()){
             return true;
@@ -150,7 +150,7 @@ class Post {
         
         $this->id = htmlspecialchars(strip_tags($this->id));
 
-        $statement->bindParam('id', $this->id);
+        $statement->bindParam(':id', $this->id);
 
         if($statement->execute()){
             return true;
