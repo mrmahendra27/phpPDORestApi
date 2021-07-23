@@ -104,4 +104,60 @@ class Post {
         printf('Error: %s.\n', $statement->error);
         return false;
     }
+
+    public function update()
+    {
+        $query = "UPDATE " . 
+                $this->table . " 
+            SET
+                title = :title,
+                author = :author,
+                body = :body,
+                category_id = :category_id
+            WHERE
+                id = :id";
+        
+        $statement = $this->connection->prepare($query);
+
+        $this->id = htmlspecialchars(strip_tags($this->id));
+        $this->title = htmlspecialchars(strip_tags($this->title));
+        $this->author = htmlspecialchars(strip_tags($this->author));
+        $this->body = htmlspecialchars(strip_tags($this->body));
+        $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+
+        $statement->bindParam('title', $this->title);
+        $statement->bindParam('author', $this->author);
+        $statement->bindParam('body', $this->body);
+        $statement->bindParam('category_id', $this->category_id);
+        $statement->bindParam('id', $this->id);
+
+        if($statement->execute()){
+            return true;
+        }
+
+        printf('Error: %s.\n', $statement->error);
+        return false;
+    }
+
+    public function delete()
+    {
+        $query = "DELETE FROM " .
+                $this->table . " 
+            WHERE
+                id= :id";
+        
+        $statement = $this->connection->prepare($query);
+        
+        $this->id = htmlspecialchars(strip_tags($this->id));
+
+        $statement->bindParam('id', $this->id);
+
+        if($statement->execute()){
+            return true;
+        }
+
+        printf("Error: %s.\n". $statement->error);
+        return false;
+
+    }
 }

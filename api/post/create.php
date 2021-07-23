@@ -15,6 +15,16 @@ $post->body = $data->body;
 $post->author = $data->author;
 $post->category_id = $data->category_id;
 
-$result = $post->create();
+if($post->create()){
+    echo json_encode(array(
+        'status' => 200,
+        'message' => 'Post Created'
+    ));
+}else{
+    echo json_encode(array(
+        'status' => 401,
+        'message' => 'Post Not Created'
+    ));
+}
 
 
